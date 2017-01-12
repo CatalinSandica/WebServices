@@ -1,8 +1,6 @@
 package com.sandica.ws;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 public class Clienti {
@@ -10,19 +8,21 @@ public class Clienti {
 private int idclient;
 private String numeClient;
 private String adresaClient;
-private long telefon;
+private String telefon;
 private String tip;
+private int codPost;
 
 public Clienti() {
 	super();
 }
-public Clienti(int idclient, String numeClient, String adresaClient, long telefon, String tip) {
+public Clienti(int idclient, String numeClient, String adresaClient, String telefon, String tip, int codPost) {
 	super();
 	this.idclient = idclient;
 	this.numeClient = numeClient;
 	this.adresaClient = adresaClient;
 	this.telefon = telefon;
 	this.tip = tip;
+	this.codPost = codPost;
 }
 public int getIdclient() {
 	return idclient;
@@ -42,10 +42,10 @@ public String getAdresaClient() {
 public void setAdresaClient(String adresaClient) {
 	this.adresaClient = adresaClient;
 }
-public long getTelefon() {
+public String getTelefon() {
 	return telefon;
 }
-public void setTelefon(long telefon) {
+public void setTelefon(String telefon) {
 	this.telefon = telefon;
 }
 public String getTip() {
@@ -53,5 +53,11 @@ public String getTip() {
 }
 public void setTip(String tip) {
 	this.tip = tip;
+}
+public int getCodPost() {
+	return codPost;
+}
+public void setCodPost(int codPost) {
+	this.codPost = codPost;
 }
 }

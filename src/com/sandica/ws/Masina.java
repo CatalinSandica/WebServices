@@ -1,12 +1,6 @@
 package com.sandica.ws;
 
 
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 import javax.annotation.Resource;
 
 import javax.sql.DataSource;
@@ -24,24 +18,18 @@ public class Masina {
 	private DataSource dataSource;
 	static String nume;
 	
-//	@GET
-//	@Produces(MediaType.TEXT_PLAIN)
-//	public String sayHello(){
-//		return "Hello there, you rebel";
-//	}
-	
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-	public Integer getInt(){
-		DBConnection con = new DBConnection();
-		Integer value = con.getUserCount();
-		return value;
+	public String sayHello(){
+		return "Hello there, you rebel";
 	}
+	
+	
 	
 	@GET
 	@Produces("application/xml")
 	public Clienti getMyClients() {
-	    return new Clienti(0, "Agamemnon", "Strada Strazilor", 3212441, "PF");
+	    return new Clienti(0, "Agamemnon", "Strada Strazilor", "0751234123", "PF",98124);
 	}
 	
 	
