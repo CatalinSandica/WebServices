@@ -1,7 +1,7 @@
 package com.sandica.ws;
 
 
-import java.util.List;
+
 
 import javax.annotation.Resource;
 
@@ -27,8 +27,6 @@ public class Masina {
 		return "Hello there, you rebel";
 	}
 	
-	
-	
 	@GET
 	@Produces("application/xml")
 	@Path("{idclient}")
@@ -50,11 +48,6 @@ public class Masina {
 	    return client;
 	    
 	}
-	public List<Clienti> getClienti(){
-		Clienti clienti = new Clienti();
-		clienti.getNumeClient();
-		return List<Clienti>;
-		
-	}
+	
 	
 }
