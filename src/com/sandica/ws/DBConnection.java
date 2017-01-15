@@ -17,7 +17,6 @@ public class DBConnection {
 			String query = "Select count(*) FROM clienti";
 			String userName = "catalin.sandica", password = "admin";
 			try {
-
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection (dbUrl, userName, password);
 			Statement stmt = con.createStatement();

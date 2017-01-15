@@ -9,11 +9,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
 import javax.sql.DataSource;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -32,6 +37,7 @@ public class Masina {
 	static String adresa;
 	static String tip;
 	static String telefon;
+	static List<String> listaClienti;
 	
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
@@ -39,17 +45,61 @@ public class Masina {
 		return "Hello there, you rebel";
 	}
 	
-	
-	public Clienti getMyClients() {
-		Clienti client = new Clienti();
-		client.setIdclient(1);
-		client.setNumeClient("Agamemnon Dandanache");
-		client.setAdresaClient("Strada Strazilor, nr 1");
-		client.setTelefon("0753423231");
-		client.setTip("PF");
-		client.setCodPost(7776231);
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("/lista")
+	public String getNumeClienti(){
+		listaClienti = new ArrayList<String>();
+		String dbUrl = "jdbc:mysql://localhost/autoturismedb";
+		String query = "Select nume_client FROM clienti";
+		String userName = "catalin.sandica", password = "admin";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection (dbUrl, userName, password);
+			PreparedStatement p =con.prepareStatement(query);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				nume = rs.getString("nume_client");
+				listaClienti.add(nume);
+				} 
+				con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String strList = String.join(", ", listaClienti);
 		
-	    return client;
+		return strList;
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/post")
+	public String updateClient(@PathParam("numeclient") String numeClient) {
+		String dbUrl = "jdbc:mysql://localhost/autoturismedb";
+		String query = "Insert into clienti (id_client,nume_client,cod_post) values (101,?,101012)";
+		String userName = "catalin.sandica", password = "admin";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection (dbUrl, userName, password);
+			PreparedStatement p =con.prepareStatement(query);
+			p.setString(1, numeClient);
+			p.execute();
+			
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "The client had been updated!";
+		
 	}
 	
 	@GET
@@ -90,7 +140,6 @@ public class Masina {
 		client.setTip(tip);
 		
 	    return client;
-		
 	}
 	
 	
