@@ -76,7 +76,6 @@ public class Masina {
 	}
 	
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
 	@Path("/post")
 	public String updateClient(@PathParam("numeclient") String numeClient) {
 		String dbUrl = "jdbc:mysql://localhost/autoturismedb";
