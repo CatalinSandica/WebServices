@@ -21,7 +21,6 @@ public class DBConnection {
 			Connection con = DriverManager.getConnection (dbUrl, userName, password);
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
-
 			while (rs.next()) {
 				numusers = rs.getInt(1);
 				} //end while

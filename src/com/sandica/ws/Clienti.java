@@ -12,6 +12,7 @@ private String telefon;
 private String tip;
 private int codPost;
 
+
 public Clienti() {
 	super();
 }
@@ -24,6 +25,7 @@ public Clienti(int idclient, String numeClient, String adresaClient, String tele
 	this.tip = tip;
 	this.codPost = codPost;
 }
+
 public int getIdclient() {
 	return idclient;
 }
@@ -60,4 +62,5 @@ public int getCodPost() {
 public void setCodPost(int codPost) {
 	this.codPost = codPost;
 }
+
 }

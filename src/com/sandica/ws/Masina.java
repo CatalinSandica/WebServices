@@ -8,17 +8,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import javax.sql.DataSource;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -38,6 +35,9 @@ public class Masina {
 	static String tip;
 	static String telefon;
 	static List<String> listaClienti;
+	private Clienti client;
+	private List<Clienti> clienti;
+	
 	
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
@@ -45,22 +45,27 @@ public class Masina {
 		return "Hello there, you rebel";
 	}
 	
+	
 	@GET
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_XML)
 	@Path("/lista")
-	public String getNumeClienti(){
+	public Clienti getNumeClienti(){
 		listaClienti = new ArrayList<String>();
+		Clienti cl = new Clienti();
 		String dbUrl = "jdbc:mysql://localhost/autoturismedb";
-		String query = "Select nume_client FROM clienti";
+		String query = "Select * FROM clienti";
 		String userName = "catalin.sandica", password = "admin";
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection (dbUrl, userName, password);
 			PreparedStatement p =con.prepareStatement(query);
 			ResultSet rs = p.executeQuery();
+			
 			while (rs.next()) {
 				nume = rs.getString("nume_client");
 				listaClienti.add(nume);
+			
 				} 
 				con.close();
 		} catch (ClassNotFoundException e) {
@@ -70,9 +75,9 @@ public class Masina {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String strList = String.join(", ", listaClienti);
+		cl.setNumeClient(nume);
 		
-		return strList;
+		return cl;
 	}
 	
 	@POST
@@ -87,8 +92,8 @@ public class Masina {
 			PreparedStatement p =con.prepareStatement(query);
 			p.setString(1, numeClient);
 			p.execute();
-			
 			con.close();
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -139,6 +144,22 @@ public class Masina {
 		client.setTip(tip);
 		
 	    return client;
+	}
+
+	public Clienti getClient() {
+		return client;
+	}
+
+	public void setClient(Clienti client) {
+		this.client = client;
+	}
+
+	public List<Clienti> getClienti() {
+		return clienti;
+	}
+
+	public void setClienti(List<Clienti> clienti) {
+		this.clienti = clienti;
 	}
 	
 	
