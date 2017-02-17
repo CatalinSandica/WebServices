@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="carsws" transaction-type="RESOURCE_LOCAL">
+		<class>com.sandica.ws.persistence.Clienti</class>
+		<class>com.sandica.ws.persistence.Masina</class>
+		<class>com.sandica.ws.persistence.Vanzari</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/dbclienti"/>
+			<property name="javax.persistence.jdbc.user" value="catalin.sandica"/>
+			<property name="javax.persistence.jdbc.password" value="admin"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
+	</persistence-unit>
+</persistence>
